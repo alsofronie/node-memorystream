@@ -1,16 +1,16 @@
 var http = require('http'),
-    MemoryStream = require('../index'),
-    util = require('util');
+    MemoryStream = require('../index');
 
 var options = {
-	host: 'google.com'
+	hostname: 'www.github.com'
 };
+
 var memStream = new MemoryStream(null,{
     readable : false
 });
 
 var req = http.request(options, function(res) {
-	util.pump(res, memStream);
+  res.pipe(memStream)
 	res.on('end',function(){
 	    console.log(memStream.toString());
 	});

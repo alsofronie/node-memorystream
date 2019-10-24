@@ -1,8 +1,7 @@
 var MemoryStream = require('../index.js'),
     expect = require('expect.js'),
     STREAM = require('stream'),
-    Q = require('q'),
-    FS = require('fs');
+    Q = require('q');
 
 describe('Test memory streams', function() { 
     

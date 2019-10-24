@@ -44,7 +44,7 @@ MemoryDuplexStream.prototype.init = function init (data, options) {
 
         data.forEach(function (chunk) {
             if (!(chunk instanceof Buffer)) {
-                chunk = new Buffer(chunk);
+                chunk = Buffer.from(chunk);
             }
             self.queue.push(chunk);
         });
@@ -182,8 +182,7 @@ MemoryReadableStream.prototype.toString =
 MemoryWritableStream.prototype.getAll = 
 MemoryDuplexStream.prototype.getAll = 
 MemoryReadableStream.prototype.getAll = function () {
-    var self = this,
-        ret = '';
+    var ret = '';
     this.queue.forEach(function (data) {
         ret += data;
     });
@@ -194,11 +193,11 @@ MemoryReadableStream.prototype.getAll = function () {
 MemoryWritableStream.prototype.toBuffer = 
 MemoryDuplexStream.prototype.toBuffer = 
 MemoryReadableStream.prototype.toBuffer = function () {
-    var buffer = new Buffer(this._getQueueSize()),
+    var buffer = Buffer.alloc(this._getQueueSize()),
         currentOffset = 0;
 
     this.queue.forEach(function (data) {
-        var data_buffer = data instanceof Buffer ? data : new Buffer(data);
+        var data_buffer = data instanceof Buffer ? data : Buffer.from(data);
         data_buffer.copy(buffer, currentOffset);
         currentOffset += data.length;
     });

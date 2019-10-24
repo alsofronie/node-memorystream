@@ -203,7 +203,7 @@ describe('Test memory streams', function() {
                 arr_test_data = [],
                 str_test_data = '';
             for (i = 0; i < 20; i++) {
-                var b = new Buffer([i]);
+                var b = Buffer.from([i]);
                 arr_test_data.push(b);
                 str_test_data += b.toString('hex');
             }
